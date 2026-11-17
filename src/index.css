@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: #fbfaf7;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    overflow-x: hidden;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 3px solid #e8622c;
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: #e8622c;
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  /* Narrow Archivo for the big headlines */
+  .cond {
+    font-stretch: 75%;
+    font-variation-settings: 'wdth' 75;
+  }
+  .draw path,
+  .draw circle {
+    stroke-dasharray: 1;
+  }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Fallback behind the hero video: slow heat shimmer */
+.heat-bg {
+  background:
+    radial-gradient(60% 80% at 20% 110%, rgba(232, 98, 44, 0.55), transparent 60%),
+    radial-gradient(50% 60% at 85% 100%, rgba(232, 98, 44, 0.35), transparent 60%),
+    linear-gradient(180deg, #0f1c2c, #16263a);
+  background-size: 140% 140%, 140% 140%, 100% 100%;
+  animation: heat 12s ease-in-out infinite alternate;
+}
+@keyframes heat {
+  from {
+    background-position: 0% 100%, 100% 100%, 0 0;
+  }
+  to {
+    background-position: 30% 80%, 70% 90%, 0 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+.pulse-ring {
+  animation: pulse-ring 1.8s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1.03, 0.97);
+  }
+  50% {
+    transform: scale(0.98, 1.04);
+  }
+  75% {
+    transform: scale(1.02, 0.99);
+  }
+}
+.flicker {
+  transform-origin: 50% 100%;
+  animation: flicker 1.6s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  transform-origin: 12px 12px;
+  animation: spin-slow 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heat-bg,
+  .pulse-ring,
+  .flicker,
+  .spin-slow {
+    animation: none;
+  }
+}
